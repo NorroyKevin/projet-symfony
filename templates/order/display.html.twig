@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Passez la commande{% endblock %}
+
+{% block body %}
+    <h1>Passer la commande</h1>
+    
+    {% for article in app.user.basket.articles %}
+       <p>{{article.quantity}} X {{article.pizza.name}} : {{article.total}} €</p>
+    {% endfor %}
+
+    <h2>Vos coordonnees</h2>
+        {{ form_start(form) }}
+
+            {{ form_row(form.address) }}
+            <br>
+            <br>
+            <h3>les coordonnées de votre carte</h3>
+        {{ form_end(form) }}
+            
+    <p>Total : {{ app.user.basket.Total }} € </p>
+
+
+    <a href="">Payer</a>
+   
+{% endblock %}
