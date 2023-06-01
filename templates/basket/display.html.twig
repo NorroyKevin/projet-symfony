@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le panier{% endblock %}
+
+{% block body %}
+
+    <div>
+         <h1>Mon Panier</h1>
+    
+    {% if app.user.basket.articles|length == 0 %}
+        <h3>Votre panier est vide </h3>
+
+    {% else %}
+        {% for article in app.user.basket.articles %}
+
+             {% if article.pizza.imageUrl %}
+                <img src="{{ article.pizza.imageUrl }}" alt="{{ article.pizza.name }}"/>
+             {% endif %}
+
+        <p> {{article.pizza.name}} </p>
+        
+        <div>
+            <a href="{{ path('app_basket_plus', {id: article.id}) }}">+</a>
+            <p>{{article.quantity}}</p>
+            <a href="{{ path('app_basket_minus', {id: article.id}) }}">-</a>
+            <p>Prix: {{article.total}} </p>
+        </div>
+        <p>
+            <a href="{{ path('app_basket_remove', {id: article.id}) }}">Supprimer du panier</a>
+        </p>
+        <hr/>
+        {% endfor %}
+    {% endif %}
+
+    
+       
+   
+
+    <h2> Total: {{ app.user.basket.Total }} </h2>
+
+
+    <a href=""> Valider le panier </a>
+    </div>
+   
+
+{% endblock %}

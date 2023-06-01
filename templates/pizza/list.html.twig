@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Liste des pizza{% endblock %}
 
 {% block body %}
-    <h1>Nos Meilleurs pizzas</h1>
+
+    <h1> Liste des pizza</h1>
+
+    <nav>
+        <a href="{{ path('app_pizza_create')}}"> Ajouter un livre </a>
+    </nav>
 
     {% for pizza in pizzas %}
         <div>

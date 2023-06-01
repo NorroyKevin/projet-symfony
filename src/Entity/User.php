@@ -49,6 +49,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Basket $basket = null;
+
+    public function __construct()
+    {
+        $this->basket = new Basket(); //création d'un panier pour l'utilisateur
+        $this->basket->setUser($this); //associer le panier à l'utilisateur
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -187,6 +196,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getBasket(): ?Basket
+    {
+        return $this->basket;
+    }
+
+    public function setBasket(?Basket $basket): self
+    {
+        $this->basket = $basket;
 
         return $this;
     }

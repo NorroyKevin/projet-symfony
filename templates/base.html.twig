@@ -16,7 +16,14 @@
     <body>
         <header>
             <nav>
-                
+                <a href="{{ path('app_pizza_home')}}">Accueil</a>
+                <a href="{{ path('app_pizza_list')}}">Liste des pizza</a>
+                <a href="{{ path('app_pizza_create')}}">nouvelle pizza</a>
+                <a href="{{ path('app_basket_display')}}">Mon panier</a>
+                <a href="">dashboard</a>
+                <a href="">liste des utilisateurs</a>
+                <a href="{{ path('app_user_registration')}}">inscription</a>
+                <a href="{{ path('app_login')}}">connection</a>
             </nav>
         </header>
         {% block body %}
