@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation{% endblock %}
+
+{% block body %}
+    <h1>Confirmation</h1>
+
+    <p>Votre commande a bien ete prise en coumpte et vous sera delivré sous peu </p>
+    <p>merci et bonne appetit</p>
+   
+    <ul>
+        {% for article in order.Articles %}
+            <li>{{ article.quantity}} x {{ article.pizza.name}} {{article.total}}€</li>
+        {% endfor %}
+
+        <p>total de votre commande : {{ order.total }} €</p>
+    </ul>
+{% endblock %}

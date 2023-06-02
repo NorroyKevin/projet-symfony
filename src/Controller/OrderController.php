@@ -49,7 +49,7 @@ class OrderController extends AbstractController
             $order->setUser($user);
             $order->setAddress($payment->address);
             
-            foreach($user->getBasket()->getArticle() as $article)
+            foreach($user->getBasket()->getArticles() as $article)
             {
                 $order->addArticle($article);
                 $user->getBasket()->removeArticle($article);
@@ -58,7 +58,9 @@ class OrderController extends AbstractController
              //save les donnees
             $repository->save($order, true);
             //redirection
-            return $this->redirectToRoute('app_order_display');
+            return $this->redirectToRoute('app_order_validate', [
+                'id' => $order->getId(),
+            ]);
         }
 
         
@@ -67,10 +69,12 @@ class OrderController extends AbstractController
         ]);
     }
 
-    #[Route('/ma-commande/validation', name: 'app_order_validate')]
-    public function validate(Request $request): Response
+    #[Route('/ma-commande/{id}/validation', name: 'app_order_validate')]
+    public function validate(Order $order): Response
     {
       
-        
+        return $this->render('order/validate.html.twig',[
+            'order' =>$order,
+        ]);
     }
 }

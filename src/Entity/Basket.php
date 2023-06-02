@@ -117,4 +117,6 @@ class Basket
         }
         return $total;
     }
+
+    
 }

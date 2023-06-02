@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -123,8 +124,12 @@ class Order
         return $this;
     }
 
-    public function getTotal():float 
-    {
-        return round($this->quantity * $this->pizza->getPrice(), 2);
+    public function getTotal():float{
+        $total= 0.0;
+        foreach($this->Articles as $article)
+        {
+            $total += $article->getTotal();
+        }
+        return round($total, 2);
     }
 }

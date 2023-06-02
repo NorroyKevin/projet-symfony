@@ -69,4 +69,11 @@ class UserController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+    // #[Route(path: '/myprofil', name: 'app_user_profil')]
+    // public function profil(): Response
+    // {
+    //     $form = $this->createForm(RegistrationType::class, $user);
+    //     $form->handleRequest($request)
+    // }
 }
